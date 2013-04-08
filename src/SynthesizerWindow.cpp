@@ -1,0 +1,573 @@
+#include "SynthesizerWindow.h"
+#include "ui_SynthesizerWindow.h"
+
+synthesizer_Window::synthesizer_Window(QWidget *parent) : QWidget(parent), ui(new Ui::synthesizer_Window)
+{
+    ui->setupUi(this);
+
+    ui->lfo1FreqDial->setRange(125, 8000);
+    ui->lfo1FreqDial->setValue(4000);
+    ui->lfo1FreqSpinBox->setRange(.125, 8.000);
+    ui->lfo1FreqSpinBox->setValue(4.000);
+    ui->lfo2FreqDial->setRange(125,8000);
+    ui->lfo2FreqDial->setValue(4000);
+    ui->lfo2FreqSpinBox->setRange(.125, 8.000);
+    ui->lfo2FreqSpinBox->setValue(4.000);
+
+    ui->cutOffSlider->setRange(200, 1600);
+    ui->cutOffSlider->setValue(500);
+    ui->cutOffSpinBox->setRange(200, 1600);
+    ui->cutOffSpinBox->setValue(500);
+
+    //Initialize audio objects
+    osc1 = new Oscillator(ui->osc1FreqSpinBox->value(), ui->osc1AmpSpinBox->value());
+    osc2 = new Oscillator(ui->osc2FreqSpinBox->value(), ui->osc2AmpSpinBox->value());
+    osc3 = new Oscillator(ui->osc3FreqSpinBox->value(), ui->osc3AmpSpinBox->value());
+    lfo1 = new LFO(ui->lfo1FreqSpinBox->value(), ui->lfo1AmpSpinBox->value());
+    lfo2 = new LFO(ui->lfo2FreqSpinBox->value(), ui->lfo2AmpSpinBox->value());
+    filter = new Filter(ui->cutOffSlider->value());
+    io = new AudioIO();
+
+    //Construct wavetables & setup oscillators to use them
+    Wavetable* sineTable = new Wavetable(32767);
+    sineTable->addSines(1,1,1); //Sine
+    Wavetable* sqrTable = new Wavetable(32767);
+    sqrTable->addSines(10,2,1); //Square
+    Wavetable* sawTable = new Wavetable(32767);
+    sawTable->addSines(21,1,1); //Saw
+
+    osc1->setWaveformTable(0,sineTable);
+    osc1->setWaveformTable(2,sqrTable);
+    osc1->setWaveformTable(1,sawTable);
+    osc1->setWaveform(0); //Sine
+
+    osc2->setWaveformTable(0,sineTable);
+    osc2->setWaveformTable(2,sqrTable);
+    osc2->setWaveformTable(1,sawTable);
+    osc1->setWaveform(0);
+
+    osc3->setWaveformTable(0,sineTable);
+    osc3->setWaveformTable(2,sqrTable);
+    osc3->setWaveformTable(1,sawTable);
+    osc3->setWaveform(0);
+
+    //Set up the synth chain: set the inputs to each component
+
+    mixer = new VolumeMixer();
+    mixer->addInput(osc1);
+    mixer->addInput(osc2);
+    mixer->addInput(osc3);
+
+    filter->setInputSource(mixer,Component::INPUT_DATA);
+
+    //An additional filter to attenuate some of the more annoying high-frequency components of the final signal (not exposed to UI)
+    Filter *finalFilter = new Filter(16000);
+    finalFilter->setInputSource(filter,Component::INPUT_DATA);
+
+    io->setInputSource(finalFilter,Component::INPUT_DATA);
+
+    setAttribute(Qt::WA_KeyCompression);
+
+    ui->osc1FreqDial->setFocus();
+
+    //Setup Combo boxes for Oscillator 1
+    ui->osc1AmpDrop->addItem("No LFO");
+    ui->osc1AmpDrop->addItem("LFO 1");
+    ui->osc1AmpDrop->addItem("LFO 2");
+    ui->osc1AmpDrop->setCurrentIndex(0);
+    ui->osc1FreqDrop->addItem("No LFO");
+    ui->osc1FreqDrop->addItem("LFO 1");
+    ui->osc1FreqDrop->addItem("LFO 2");
+    ui->osc1FreqDrop->setCurrentIndex(0);
+
+    //Setup combo boxes for oscillator 2
+    ui->osc2AmpDrop->addItem("No LFO");
+    ui->osc2AmpDrop->addItem("LFO 1");
+    ui->osc2AmpDrop->addItem("LFO 2");
+    ui->osc2AmpDrop->setCurrentIndex(0);
+    ui->osc2FreqDrop->addItem("No LFO");
+    ui->osc2FreqDrop->addItem("LFO 1");
+    ui->osc2FreqDrop->addItem("LFO 2");
+    ui->osc2AmpDrop->setCurrentIndex(0);
+
+    //Setup combo boxes for oscillator 3
+    ui->osc3AmpDrop->addItem("No LFO");
+    ui->osc3AmpDrop->addItem("LFO 1");
+    ui->osc3AmpDrop->addItem("LFO 2");
+    ui->osc3AmpDrop->setCurrentIndex(0);
+    ui->osc3FreqDrop->addItem("No LFO");
+    ui->osc3FreqDrop->addItem("LFO 1");
+    ui->osc3FreqDrop->addItem("LFO 2");
+    ui->osc3FreqDrop->setCurrentIndex(0);
+
+    //Setup combo boxes for LFO 1
+    ui->lfo1AmpDrop->addItem("No LFO");
+    ui->lfo1AmpDrop->addItem("LFO 2");
+    ui->lfo1AmpDrop->setCurrentIndex(0);
+    ui->lfo1FreqDrop->addItem("No LFO");
+    ui->lfo1FreqDrop->addItem("LFO 2");
+    ui->lfo1FreqDrop->setCurrentIndex(0);
+
+    //Setup combo boxes for LFO 2
+    ui->lfo2AmpDrop->addItem("No LFO");
+    ui->lfo2AmpDrop->addItem("LFO 1");
+    ui->lfo2AmpDrop->setCurrentIndex(0);
+    ui->lfo2FreqDrop->addItem("No LFO");
+    ui->lfo2FreqDrop->addItem("LFO 1");
+    ui->lfo2FreqDrop->setCurrentIndex(0);
+
+    //Setup combo box for filter
+    ui->cutOffDrop->addItem("No LFO");
+    ui->cutOffDrop->addItem("LFO 1");
+    ui->cutOffDrop->addItem("LFO 2");
+    ui->cutOffDrop->setCurrentIndex(0);
+}
+
+synthesizer_Window::~synthesizer_Window()
+{
+    delete ui;
+    delete io; //IMPORTANT -- call this to ensure PortAudio gets closed properly
+}
+
+/*------------------
+ *Oscillator Slots
+ *------------------
+ */
+
+//Oscillator 1
+void synthesizer_Window::osc1AmpUpdate(double amp)
+{
+    osc1->setAmplitude(amp);
+    ui->osc1AmpDial->setFocus();
+}
+void synthesizer_Window::osc1AmpDial() 
+{
+    ui->osc1AmpSpinBox->setValue((double)ui->osc1AmpDial->value() / 100); 
+    osc1->setAmplitude(ui->osc1AmpSpinBox->value());
+    ui->osc1AmpDial->setFocus();
+}
+void synthesizer_Window::osc1AmpSpin() { ui->osc1AmpDial->setValue(ui->osc1AmpSpinBox->value() * 100); }
+void synthesizer_Window::osc1FreqUpdate(int freq)
+{
+    osc1->setFrequencyDetune(freq);
+    ui->osc1FreqDial->setFocus();
+}
+void synthesizer_Window::osc1Sine() { osc1->setWaveform(0); }
+void synthesizer_Window::osc1Saw() { osc1->setWaveform(1); }
+void synthesizer_Window::osc1Sqr() { osc1->setWaveform(2); }
+void synthesizer_Window::osc1Noi() { osc1->setWaveform(-1); }
+void synthesizer_Window::osc1AmpLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc1->setInputSource(NULL, 2);
+        break;
+    case 1:
+        osc1->setInputSource(lfo1, 2);
+        break;
+    case 2:
+        osc1->setInputSource(lfo2, 2);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc1AmpDial->setFocus();
+}
+void synthesizer_Window::osc1FreqLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc1->setInputSource(NULL, 1);
+        break;
+    case 1:
+        osc1->setInputSource(lfo1, 1);
+        break;
+    case 2:
+        osc1->setInputSource(lfo2, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc1FreqDial->setFocus();
+}
+
+//Oscillator 2
+void synthesizer_Window::osc2AmpUpdate(double amp)
+{
+    osc2->setAmplitude(amp);
+    ui->osc2AmpDial->setFocus();
+}
+void synthesizer_Window::osc2FreqUpdate(int freq)
+{
+    osc2->setFrequencyDetune(freq);
+    ui->osc2FreqDial->setFocus();
+}
+void synthesizer_Window::osc2AmpDial() 
+{ 
+    ui->osc2AmpSpinBox->setValue((double)ui->osc2AmpDial->value() / 100); 
+    osc2->setAmplitude(ui->osc2AmpSpinBox->value());
+    ui->osc2AmpDial->setFocus();
+}
+void synthesizer_Window::osc2AmpSpin() { ui->osc2AmpDial->setValue(ui->osc2AmpSpinBox->value() * 100); }
+void synthesizer_Window::osc2Sine() { osc2->setWaveform(0); }
+void synthesizer_Window::osc2Saw() { osc2->setWaveform(1); }
+void synthesizer_Window::osc2Sqr() { osc2->setWaveform(2); }
+void synthesizer_Window::osc2Noi() { osc2->setWaveform(-1); }
+void synthesizer_Window::osc2AmpLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc2->setInputSource(NULL, 2);
+        break;
+    case 1:
+        osc2->setInputSource(lfo1, 2);
+        break;
+    case 2:
+        osc2->setInputSource(lfo2, 2);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc2AmpDial->setFocus();
+}
+void synthesizer_Window::osc2FreqLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc2->setInputSource(NULL, 1);
+        break;
+    case 1:
+        osc2->setInputSource(lfo1, 1);
+        break;
+    case 2:
+        osc2->setInputSource(lfo2, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc2FreqDial->setFocus();
+}
+
+//Oscillator 3
+void synthesizer_Window::osc3AmpUpdate(double amp)
+{
+    osc3->setAmplitude(amp);
+    ui->osc3AmpDial->setFocus();
+}
+void synthesizer_Window::osc3FreqUpdate(int freq)
+{
+    osc3->setFrequencyDetune(freq);
+    ui->osc3FreqDial->setFocus();
+}
+void synthesizer_Window::osc3AmpDial() 
+{
+    ui->osc3AmpSpinBox->setValue((double)ui->osc3AmpDial->value() / 100); 
+    osc3->setAmplitude(ui->osc3AmpSpinBox->value());
+    ui->osc3AmpDial->setFocus();
+}
+void synthesizer_Window::osc3AmpSpin() { ui->osc3AmpDial->setValue(ui->osc3AmpSpinBox->value() * 100); }
+void synthesizer_Window::osc3Sine() { osc3->setWaveform(0); }
+void synthesizer_Window::osc3Saw() { osc3->setWaveform(1); }
+void synthesizer_Window::osc3Sqr() { osc3->setWaveform(2); }
+void synthesizer_Window::osc3Noi() { osc3->setWaveform(-1); }
+void synthesizer_Window::osc3AmpLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc3->setInputSource(NULL, 2);
+        break;
+    case 1:
+        osc3->setInputSource(lfo1, 2);
+        break;
+    case 2:
+        osc3->setInputSource(lfo2, 2);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc3AmpDial->setFocus();
+}
+void synthesizer_Window::osc3FreqLFOUpdate(int lfo)
+{
+    switch(lfo) {
+    case 0:
+        osc3->setInputSource(NULL, 1);
+        break;
+    case 1:
+        osc3->setInputSource(lfo1, 1);
+        break;
+    case 2:
+        osc3->setInputSource(lfo2, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->osc3FreqDial->setFocus();
+}
+
+/*----------------------
+ *End Oscillator Slots
+ *----------------------
+ */
+
+/*
+ *-----------
+ *LFO Slots
+ *-----------
+ */
+
+//LFO 1
+void synthesizer_Window::lfo1AmpUpdate(double amp)
+{
+    lfo1->setAmplitude(amp);
+    ui->lfo1AmpDial->setFocus();
+}
+void synthesizer_Window::lfo1AmpDial() 
+{
+    ui->lfo1AmpSpinBox->setValue((double)ui->lfo1AmpDial->value() / 100); 
+    lfo1->setAmplitude(ui->lfo1AmpSpinBox->value());
+    ui->lfo1AmpDial->setFocus();
+}
+void synthesizer_Window::lfo1AmpSpin() { ui->lfo1AmpDial->setValue(ui->lfo1AmpSpinBox->value() * 100); }
+void synthesizer_Window::lfo1FreqUpdate(double freq)
+{
+    lfo1->setFrequency(freq);
+    ui->lfo1FreqDial->setFocus();
+}
+void synthesizer_Window::lfo1Sine() { lfo1->setWaveform(0); }
+void synthesizer_Window::lfo1Saw() { lfo1->setWaveform(1); }
+void synthesizer_Window::lfo1Sqr() { lfo1->setWaveform(2); }
+void synthesizer_Window::lfo1Noi() { lfo1->setWaveform(-1); }
+void synthesizer_Window::lfo1FreqDial() { ui->lfo1FreqSpinBox->setValue((double)ui->lfo1FreqDial->value() / 1000 ); }
+void synthesizer_Window::lfo1FreqSpin() { ui->lfo1FreqDial->setValue(ui->lfo1FreqSpinBox->value() * 1000); }
+void synthesizer_Window::lfo1AmpLFOUpdate(int index)
+{
+    switch(index) {
+    case 0:
+        lfo1->setInputSource(NULL, 2);
+        break;
+    case 1:
+        lfo1->setInputSource(lfo2, 2);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->lfo1AmpDial->setFocus();
+}
+void synthesizer_Window::lfo1FreqLFOUpdate(int index)
+{
+    switch(index) {
+    case 0:
+        lfo1->setInputSource(NULL, 1);
+        break;
+    case 1:
+        lfo1->setInputSource(lfo2, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->lfo1FreqDial->setFocus();
+}
+
+//LFO 2
+void synthesizer_Window::lfo2AmpUpdate(double amp)
+{
+    lfo2->setAmplitude(amp);
+    ui->lfo2AmpDial->setFocus();
+}
+void synthesizer_Window::lfo2AmpDial() 
+{
+    ui->lfo2AmpSpinBox->setValue((double)ui->lfo2AmpDial->value() / 100); 
+    lfo2->setAmplitude(ui->lfo2AmpSpinBox->value());
+    ui->lfo2AmpDial->setFocus();
+}
+void synthesizer_Window::lfo2AmpSpin() { ui->lfo2AmpDial->setValue(ui->lfo2AmpSpinBox->value() * 100); }
+void synthesizer_Window::lfo2FreqUpdate(double freq)
+{
+    lfo2->setFrequency(freq);
+    ui->lfo2FreqDial->setFocus();
+}
+void synthesizer_Window::lfo2Sine() { lfo2->setWaveform(0); }
+void synthesizer_Window::lfo2Saw() { lfo2->setWaveform(1); }
+void synthesizer_Window::lfo2Sqr() { lfo2->setWaveform(2); }
+void synthesizer_Window::lfo2Noi() { lfo2->setWaveform(-1); }
+void synthesizer_Window::lfo2FreqDial() { ui->lfo2FreqSpinBox->setValue((double)ui->lfo2FreqDial->value() / 1000); }
+void synthesizer_Window::lfo2FreqSpin() { ui->lfo2FreqDial->setValue(ui->lfo2FreqSpinBox->value() * 1000); }
+void synthesizer_Window::lfo2AmpLFOUpdate(int index)
+{
+    switch(index) {
+    case 0:
+        lfo2->setInputSource(NULL, 2);
+        break;
+    case 1:
+        lfo2->setInputSource(lfo1, 2);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->lfo2AmpDial->setFocus();
+}
+void synthesizer_Window::lfo2FreqLFOUpdate(int index)
+{
+    switch(index) {
+    case 0:
+        lfo2->setInputSource(NULL, 1);
+        break;
+    case 1:
+        lfo2->setInputSource(lfo1, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->lfo2FreqDial->setFocus();
+}
+/*
+ *---------------
+ *End LFO Slots
+ *---------------
+ */
+
+
+/*--------------
+ *Filter Slots
+ *--------------
+ */
+void synthesizer_Window::enableFilter(bool state)
+{
+    ui->lowPassRadio->setEnabled(state);
+    ui->hiPassRadio->setEnabled(state);
+    ui->cutOffSlider->setEnabled(state);
+    ui->cutOffSpinBox->setEnabled(state);
+    ui->cutOffDrop->setEnabled(state);
+    filter->setEnabled(state);
+}
+void synthesizer_Window::filterSetHigh() { filter->setType(1); }
+void synthesizer_Window::filterSetLow() { filter->setType(0); }
+void synthesizer_Window::filterCutOffUpdate(int cut)
+{
+    filter->setCutoff(cut);
+    ui->cutOffSlider->setFocus();
+}
+void synthesizer_Window::cutOffFreqLFOUpdate(int lfo) {
+    switch(lfo) {
+    case 0:
+        filter->setInputSource(NULL, 1);
+        break;
+    case 1:
+        filter->setInputSource(lfo1, 1);
+        break;
+    case 2:
+        filter->setInputSource(lfo2, 1);
+        break;
+    default:
+        std::cout << "How did you get here?" << std::endl;
+    }
+
+    ui->lowPassRadio->setFocus();
+}
+
+/*------------------
+ *End Filter Slots
+ *------------------
+ */
+
+/*-----------
+ *Pan Slots
+ *-----------
+ */
+void synthesizer_Window::panSliderUpdate() { ui->panSpin->setValue((double)ui->panSlider->value() / 100); }
+void synthesizer_Window::panSpinUpdate() { ui->panSlider->setValue(ui->panSpin->value() * 100); }
+void synthesizer_Window::panUpdate()
+{
+    io->setPan(ui->panSpin->value());
+    ui->panSlider->setFocus();
+}
+/*---------------
+ *End Pan Slots
+ *---------------
+ */
+
+/*--------------
+ *Volume Slots
+ *--------------
+ */
+void synthesizer_Window::volumeSlider() { ui->volumeSpinBox->setValue((double)ui->volumeSlider->value() / 100); }
+void synthesizer_Window::volumeSpin() { ui->volumeSlider->setValue((double)ui->volumeSpinBox->value() * 100); }
+void synthesizer_Window::volumeUpdate()
+{
+    io->setMasterVolume(ui->volumeSpinBox->value());
+    ui->volumeSlider->setFocus();
+}
+
+/*------------------
+ *End Volume Slots
+ *------------------
+ */
+
+/*------------
+ *Start/stop
+ *------------
+ */
+void synthesizer_Window::keyPressEvent(QKeyEvent * event) {
+
+    if(event->isAutoRepeat()) { event->ignore(); }
+
+    else {
+        int semitone;
+        switch(event->key()) {
+            case Qt::Key_Escape: qApp->quit();
+            case Qt::Key_A: semitone = 0; break;
+            case Qt::Key_W: semitone = 1; break;
+            case Qt::Key_S: semitone = 2; break;
+            case Qt::Key_E: semitone = 3; break;
+            case Qt::Key_D: semitone = 4; break;
+            case Qt::Key_F: semitone = 5; break;
+            case Qt::Key_T: semitone = 6; break;
+            case Qt::Key_G: semitone = 7; break;
+            case Qt::Key_Y: semitone = 8; break;
+            case Qt::Key_H: semitone = 9; break;
+            case Qt::Key_U: semitone = 10; break;
+            case Qt::Key_J: semitone = 11; break;
+            case Qt::Key_K: semitone = 12; break;
+            default: return;
+        }
+
+            //Add a "bass pedal" key: drop by one octave when Ctrl is pressed
+            if (event->modifiers()==Qt::ControlModifier)
+                semitone -= 12;
+
+            // Using the formula for musical frequency in 12-TET (classical Western scale):
+            // f = b*2^(n/12) where f is frequency, b is a basis frequency and n is number of half-steps from the base frequency
+            // Using a base frequency of about 262 Hz, which is Middle C in standard tuning
+            double frequency = 261.625565 * pow(2, (double)semitone/12);
+            osc1->setBaseFrequency(frequency);
+            osc2->setBaseFrequency(frequency);
+            osc3->setBaseFrequency(frequency);
+
+            // Start audio playback
+            io->play();
+     }
+}
+
+void synthesizer_Window::keyReleaseEvent(QKeyEvent * event) {
+    if(event->isAutoRepeat()) { event->ignore(); }
+    else {
+        //Stop the playback
+        io->stop();
+    }
+}
+
+/*----------------
+ *End Start/stop
+ *----------------
+ */

@@ -1,0 +1,20 @@
+        if(isReleasing)
+        {
+            //Invoke the synthesis chain: get a sample of input by calling on whatever the next component in the chain is to generate one.
+            if(inputs[INPUT_DATA] != NULL) { inSample = inputs[INPUT_DATA]->getSample(n); }
+
+            //Apply the master volume control
+            inSample *= masterVolume;
+
+		    inSample *= releaseAmp;
+            releaseAmp -= 1.0/frameCount;
+            if(releaseAmp < 0.01){
+                isReleasing = false;
+                isPlaying = false;
+            }
+
+            //Perform panning: generate left and right samples
+            lSample = inSample;//*sqrt(1 - pan) * 0.707;
+            rSample = inSample;//*sqrt(pan) * 0.707;
+            //Scale by 1/sqrt(2) to keep constant power
+        }

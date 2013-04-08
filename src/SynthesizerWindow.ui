@@ -1,0 +1,2505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>synthesizer_Window</class>
+ <widget class="QWidget" name="synthesizer_Window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>644</width>
+    <height>699</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Digital Synthesizer</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_14">
+     <item>
+      <layout class="QHBoxLayout" name="oscLayout">
+       <item>
+        <layout class="QVBoxLayout" name="osc1Layout">
+         <item>
+          <widget class="QLabel" name="osc1Label">
+           <property name="text">
+            <string>Oscillator 1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc1FreqLayout">
+           <item>
+            <widget class="QLabel" name="osc1FreqLabel">
+             <property name="text">
+              <string>Frequency Detune</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc1FreqLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc1FreqLayout_3">
+               <item>
+                <widget class="QSpinBox" name="osc1FreqSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="minimum">
+                  <number>-12</number>
+                 </property>
+                 <property name="maximum">
+                  <number>12</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc1FreqDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc1FreqDial">
+               <property name="minimum">
+                <number>-12</number>
+               </property>
+               <property name="maximum">
+                <number>12</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc1AmpLayout">
+           <item>
+            <widget class="QLabel" name="osc1AmpLabel">
+             <property name="text">
+              <string>Amplitude</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc1AmpLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc1AmpLayout_3">
+               <item>
+                <widget class="QDoubleSpinBox" name="osc1AmpSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc1AmpDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc1AmpDial">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="osc1RadButtLabel">
+           <property name="text">
+            <string>Waveform</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="osc1RadLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="osc1SinRadio">
+             <property name="text">
+              <string>Sine</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="osc1SqrRadio">
+             <property name="text">
+              <string>Square</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="osc1SawRadio">
+             <property name="text">
+              <string>Saw</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QRadioButton" name="osc1NoiseRadio">
+             <property name="text">
+              <string>Noise</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="osc2Layout">
+         <item>
+          <widget class="QLabel" name="osc2Label">
+           <property name="text">
+            <string>Oscillator 2</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc2FreqLayout">
+           <item>
+            <widget class="QLabel" name="osc2FreqLabel">
+             <property name="text">
+              <string>Frequency Detune</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc2FreqLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc2FreqLayout_3">
+               <item>
+                <widget class="QSpinBox" name="osc2FreqSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="minimum">
+                  <number>-12</number>
+                 </property>
+                 <property name="maximum">
+                  <number>12</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc2FreqDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc2FreqDial">
+               <property name="minimum">
+                <number>-12</number>
+               </property>
+               <property name="maximum">
+                <number>12</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc2AmpLayout">
+           <item>
+            <widget class="QLabel" name="osc2AmpLabel">
+             <property name="text">
+              <string>Amplitude</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc2AmpLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc2AmpLayout_3">
+               <item>
+                <widget class="QDoubleSpinBox" name="osc2AmpSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc2AmpDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc2AmpDial">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="osc2RadButtLabel">
+           <property name="text">
+            <string>Waveform</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="osc2RadLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="osc2SinRad">
+             <property name="text">
+              <string>Sine</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="osc2SqrRad">
+             <property name="text">
+              <string>Square</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="osc2SawRad">
+             <property name="text">
+              <string>Saw</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QRadioButton" name="osc2NoiseRad">
+             <property name="text">
+              <string>Noise</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="osc3Layout">
+         <item>
+          <widget class="QLabel" name="osc3Label">
+           <property name="text">
+            <string>Oscillator 3</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc3FreqLayout">
+           <item>
+            <widget class="QLabel" name="osc3FreqLabel">
+             <property name="text">
+              <string>Frequency Detune</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc3FreqLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc3FreqLayout_3">
+               <item>
+                <widget class="QSpinBox" name="osc3FreqSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="minimum">
+                  <number>-12</number>
+                 </property>
+                 <property name="maximum">
+                  <number>12</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc3FreqDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc3FreqDial">
+               <property name="minimum">
+                <number>-12</number>
+               </property>
+               <property name="maximum">
+                <number>12</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="osc3AmpLayout">
+           <item>
+            <widget class="QLabel" name="osc3AmpLabel">
+             <property name="text">
+              <string>Amplitude</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="osc3AmpLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="osc3AmpLayout_3">
+               <item>
+                <widget class="QDoubleSpinBox" name="osc3AmpSpinBox">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="osc3AmpDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="osc3AmpDial">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="osc3RadButtLabel">
+           <property name="text">
+            <string>Waveform</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="osc3RadLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="osc3SinRad">
+             <property name="text">
+              <string>Sine</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc3ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="osc3SqrRad">
+             <property name="text">
+              <string>Square</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc3ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="osc3SawRad">
+             <property name="text">
+              <string>Saw</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc3ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QRadioButton" name="osc3NoiseRad">
+             <property name="text">
+              <string>Noise</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">osc3ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_12">
+         <item>
+          <widget class="QLabel" name="lfo1Label">
+           <property name="text">
+            <string>LFO 1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="lfo1FreqLabel">
+             <property name="text">
+              <string>Frequency</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <widget class="QDoubleSpinBox" name="lfo1FreqSpinBox">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.125000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>8.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.250000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="lfo1FreqDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="lfo1FreqDial">
+               <property name="minimum">
+                <number>125</number>
+               </property>
+               <property name="maximum">
+                <number>8000</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+               <property name="value">
+                <number>4000</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QLabel" name="lfo1AmpLabel">
+             <property name="text">
+              <string>Amplitude</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QDoubleSpinBox" name="lfo1AmpSpinBox">
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="lfo1AmpDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="lfo1AmpDial">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="lfo1RadButtLabel">
+           <property name="text">
+            <string>Waveform</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="lfo1RadLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="lfo1SinRadio">
+             <property name="text">
+              <string>Sine</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="lfo1SqrRadio">
+             <property name="text">
+              <string>Square</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="lfo1SawRadio">
+             <property name="text">
+              <string>Saw</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QRadioButton" name="lfo1NoiseRadio">
+             <property name="text">
+              <string>Noise</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo1ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <widget class="QLabel" name="lfo2Label">
+           <property name="text">
+            <string>LFO 2</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="lfo2FreqLabel">
+             <property name="text">
+              <string>Frequency</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QDoubleSpinBox" name="lfo2FreqSpinBox">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.125000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>8.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.250000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="lfo2FreqDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="lfo2FreqDial">
+               <property name="minimum">
+                <number>125</number>
+               </property>
+               <property name="maximum">
+                <number>8000</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+               <property name="value">
+                <number>4000</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="lfo2AmpLabel">
+             <property name="text">
+              <string>Amplitude</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QDoubleSpinBox" name="lfo2AmpSpinBox">
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="lfo2AmpDrop"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QDial" name="lfo2AmpDial">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="notchesVisible">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="lfo2RadButtLabel">
+           <property name="text">
+            <string>Waveform</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="lfo2RadLayout">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="lfo2SinRadio">
+             <property name="text">
+              <string>Sine</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="lfo2SqrRadio">
+             <property name="text">
+              <string>Square</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="lfo2SawRadio">
+             <property name="text">
+              <string>Saw</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QRadioButton" name="lfo2NoiseRadio">
+             <property name="text">
+              <string>Noise</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">lfo2ButtonGroup</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_13">
+         <item>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="filterLabel">
+             <property name="text">
+              <string>Filters</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="cutOffLabel">
+               <property name="text">
+                <string>Cutoff Frequency</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QSlider" name="cutOffSlider">
+                 <property name="minimum">
+                  <number>200</number>
+                 </property>
+                 <property name="maximum">
+                  <number>1600</number>
+                 </property>
+                 <property name="value">
+                  <number>500</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QSpinBox" name="cutOffSpinBox">
+                   <property name="minimum">
+                    <number>200</number>
+                   </property>
+                   <property name="maximum">
+                    <number>1600</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100</number>
+                   </property>
+                   <property name="value">
+                    <number>500</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="cutOffDrop"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QCheckBox" name="filterEnableCheck">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="text">
+                <string>Enable Filter</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="filterRadioLayout">
+               <item>
+                <widget class="QRadioButton" name="hiPassRadio">
+                 <property name="text">
+                  <string>High Pass</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">filterButtonGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="lowPassRadio">
+                 <property name="text">
+                  <string>Low Pass</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">filterButtonGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Line" name="line_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <layout class="QVBoxLayout" name="panLayout">
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="panLabel">
+               <property name="text">
+                <string>Pan Slider</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSlider" name="panSlider">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>50</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="panSpin">
+               <property name="maximum">
+                <double>1.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+               <property name="value">
+                <double>0.500000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="volumeLayout">
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="volumeSpinLayout">
+               <item>
+                <spacer name="volumeSpacer1">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="volumeSpinBox">
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.050000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.250000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="volumeSpacer2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="1" rowspan="2">
+              <widget class="QSlider" name="volumeSlider">
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="value">
+                <number>25</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="tickPosition">
+                <enum>QSlider::TicksAbove</enum>
+               </property>
+               <property name="tickInterval">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="volumeLabel">
+               <property name="text">
+                <string>Volume</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>osc1FreqSpinBox</tabstop>
+  <tabstop>osc1AmpSpinBox</tabstop>
+  <tabstop>osc1SinRadio</tabstop>
+  <tabstop>osc1SqrRadio</tabstop>
+  <tabstop>osc1SawRadio</tabstop>
+  <tabstop>osc1NoiseRadio</tabstop>
+  <tabstop>osc2FreqSpinBox</tabstop>
+  <tabstop>osc2AmpSpinBox</tabstop>
+  <tabstop>osc2SinRad</tabstop>
+  <tabstop>osc2SqrRad</tabstop>
+  <tabstop>osc2SawRad</tabstop>
+  <tabstop>osc2NoiseRad</tabstop>
+  <tabstop>osc3FreqSpinBox</tabstop>
+  <tabstop>osc3AmpSpinBox</tabstop>
+  <tabstop>osc3SinRad</tabstop>
+  <tabstop>osc3SqrRad</tabstop>
+  <tabstop>osc3SawRad</tabstop>
+  <tabstop>osc3NoiseRad</tabstop>
+  <tabstop>volumeSlider</tabstop>
+  <tabstop>volumeSpinBox</tabstop>
+  <tabstop>filterEnableCheck</tabstop>
+  <tabstop>hiPassRadio</tabstop>
+  <tabstop>lowPassRadio</tabstop>
+  <tabstop>cutOffSlider</tabstop>
+  <tabstop>cutOffSpinBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cutOffSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>cutOffSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>538</x>
+     <y>488</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cutOffSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>cutOffSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>538</x>
+     <y>488</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>628</x>
+     <y>448</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>filterEnableCheck</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>enableFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>629</x>
+     <y>386</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>389</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lowPassRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>filterSetLow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hiPassRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>filterSetHigh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>531</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cutOffSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>filterCutOffUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1AmpDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1AmpLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1FreqDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1FreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2FreqDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2FreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>478</x>
+     <y>0</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2AmpDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2AmpLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>491</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3FreqDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3FreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3AmpDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3AmpLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cutOffDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>cutOffFreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>627</x>
+     <y>486</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>539</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1FreqSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1FreqUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>78</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>243</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2FreqSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2FreqUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>428</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1FreqDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1FreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>18</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1AmpDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1AmpLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2AmpDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2AmpLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>590</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2FreqDrop</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2FreqLFOUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>565</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1FreqDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc1FreqSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>141</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>97</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc1FreqDial</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc2FreqDial</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>392</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2FreqDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc2FreqSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3FreqDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc3FreqSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>587</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>521</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1FreqDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1FreqDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>157</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>638</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1FreqSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1FreqSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>84</x>
+     <y>638</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2FreqSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2FreqSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>334</x>
+     <y>638</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2FreqDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2FreqDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>422</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>315</x>
+     <y>629</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>panSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>panSliderUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>428</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>533</x>
+     <y>637</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>panSpin</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>panSpinUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>428</x>
+     <y>639</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>612</x>
+     <y>638</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>panSpin</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>panUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>428</x>
+     <y>639</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>637</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>volumeSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>volumeUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>658</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>573</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>volumeSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>volumeSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>658</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>605</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>volumeSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>volumeSlider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>628</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>551</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1SinRadio</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1Sine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1SawRadio</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1Saw()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>54</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1SqrRadio</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1Sqr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1NoiseRadio</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1Noi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2SinRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2Sine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2SawRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2Saw()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2SqrRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2Sqr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>418</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2NoiseRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2Noi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>418</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3SinRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3Sine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>531</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3SawRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3Saw()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>531</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3SqrRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3Sqr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3NoiseRad</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3Noi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1SinRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1Sine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>653</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>341</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1SawRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1Saw()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>62</x>
+     <y>685</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>369</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1SqrRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1Sqr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>653</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1NoiseRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1Noi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>125</x>
+     <y>672</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2SinRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2Sine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>653</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>437</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2SawRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2Saw()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>685</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2SqrRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2Sqr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>653</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2NoiseRadio</sender>
+   <signal>clicked()</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2Noi()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>685</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>472</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1FreqUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2FreqUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>288</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>126</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3FreqUpdate(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>494</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1AmpDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1AmpDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1AmpSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>42</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>505</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2AmpSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>216</x>
+     <y>537</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2AmpDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2AmpDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>553</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1AmpSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>27</x>
+     <y>190</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2AmpSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1AmpDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc1AmpDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2AmpDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2AmpDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3AmpDial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3AmpDial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc1AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2AmpUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>27</x>
+     <y>179</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>136</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc2AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc2AmpUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3AmpUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo1AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo1AmpUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>56</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lfo2AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>lfo2AmpUpdate(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3AmpSpinBox</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>synthesizer_Window</receiver>
+   <slot>osc3AmpSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>349</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>osc3FreqSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>osc3FreqDial</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>481</x>
+     <y>85</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>154</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>enableFilter(bool)</slot>
+  <slot>osc1AmpUpdate(double)</slot>
+  <slot>osc2AmpUpdate(double)</slot>
+  <slot>osc3AmpUpdate(double)</slot>
+  <slot>osc1FreqUpdate(int)</slot>
+  <slot>osc2FreqUpdate(int)</slot>
+  <slot>osc3FreqUpdate(int)</slot>
+  <slot>filterSetLow()</slot>
+  <slot>filterSetHigh()</slot>
+  <slot>filterCutOffUpdate(int)</slot>
+  <slot>osc1AmpLFOUpdate(int)</slot>
+  <slot>osc1FreqLFOUpdate(int)</slot>
+  <slot>osc2AmpLFOUpdate(int)</slot>
+  <slot>osc2FreqLFOUpdate(int)</slot>
+  <slot>osc3AmpLFOUpdate(int)</slot>
+  <slot>osc3FreqLFOUpdate(int)</slot>
+  <slot>cutOffFreqLFOUpdate(int)</slot>
+  <slot>lfo1FreqUpdate(double)</slot>
+  <slot>lfo1AmpUpdate(double)</slot>
+  <slot>lfo2FreqUpdate(double)</slot>
+  <slot>lfo2AmpUpdate(double)</slot>
+  <slot>lfo1AmpLFOUpdate(int)</slot>
+  <slot>lfo1FreqLFOUpdate(int)</slot>
+  <slot>lfo2AmpLFOUpdate(int)</slot>
+  <slot>lfo2FreqLFOUpdate(int)</slot>
+  <slot>lfo1FreqDial()</slot>
+  <slot>lfo1FreqSpin()</slot>
+  <slot>lfo2FreqDial()</slot>
+  <slot>lfo2FreqSpin()</slot>
+  <slot>panSliderUpdate()</slot>
+  <slot>panSpinUpdate()</slot>
+  <slot>panUpdate()</slot>
+  <slot>volumeSpin()</slot>
+  <slot>volumeSlider()</slot>
+  <slot>volumeUpdate()</slot>
+  <slot>osc1Sine()</slot>
+  <slot>osc1Saw()</slot>
+  <slot>osc1Sqr()</slot>
+  <slot>osc1Noi()</slot>
+  <slot>osc2Sine()</slot>
+  <slot>osc2Saw()</slot>
+  <slot>osc2Sqr()</slot>
+  <slot>osc2Noi()</slot>
+  <slot>osc3Sine()</slot>
+  <slot>osc3Saw()</slot>
+  <slot>osc3Sqr()</slot>
+  <slot>osc3Noi()</slot>
+  <slot>lfo1Sine()</slot>
+  <slot>lfo1Saw()</slot>
+  <slot>lfo1Sqr()</slot>
+  <slot>lfo1Noi()</slot>
+  <slot>lfo2Sine()</slot>
+  <slot>lfo2Saw()</slot>
+  <slot>lfo2Sqr()</slot>
+  <slot>lfo2Noi()</slot>
+  <slot>lfo1AmpDial()</slot>
+  <slot>lfo2AmpDial()</slot>
+  <slot>lfo1AmpSpin()</slot>
+  <slot>lfo2AmpSpin()</slot>
+  <slot>osc1AmpDial()</slot>
+  <slot>osc1AmpSpin()</slot>
+  <slot>osc2AmpSpin()</slot>
+  <slot>osc2AmpDial()</slot>
+  <slot>osc3AmpSpin()</slot>
+  <slot>osc3AmpDial()</slot>
+ </slots>
+ <buttongroups>
+  <buttongroup name="lfo2ButtonGroup"/>
+  <buttongroup name="filterButtonGroup"/>
+  <buttongroup name="lfo1ButtonGroup"/>
+  <buttongroup name="osc2ButtonGroup"/>
+  <buttongroup name="osc3ButtonGroup"/>
+  <buttongroup name="osc1ButtonGroup"/>
+ </buttongroups>
+</ui>
